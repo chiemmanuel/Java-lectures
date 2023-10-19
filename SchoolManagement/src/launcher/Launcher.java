@@ -32,7 +32,7 @@ public class Launcher {
 			List<Students> student_list = payservice.read();
 			System.out.println("Before sort: \n");
 			printStudents(student_list);
-			payservice.sortByYear(student_list);
+			payservice.sortByAge(student_list);
 			System.out.println("\n\n After sort: \n");
 			printStudents(student_list);
 		} catch (IOException e) {
