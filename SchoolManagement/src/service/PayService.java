@@ -15,7 +15,7 @@ public class PayService {
 	public List<Students> read() throws IOException {
 		
 		FileReader fread = new FileReader(
-				"C:\\Users\\tbert\\OneDrive\\Documents\\Travis_Classwork\\Java Applications\\students.csv");
+				"C:\\Users\\emmaj\\OneDrive\\Bureau\\Java sem1 year 2\\SchoolManagement\\students.csv");
 		BufferedReader br = new BufferedReader(fread);
 		String line = null;
 		String splitBy = ",";
@@ -51,8 +51,8 @@ public class PayService {
 		return students;
 	}
 	
-	public void sortByYear(List<Students> student_list) {
-	    Collections.sort(student_list, (s1, s2) -> Integer.valueOf(s1.getYear()).compareTo(Integer.valueOf(s2.getYear())));
+	public void sortByAge(List<Students> student_list) {
+	    Collections.sort(student_list, (s1, s2) -> Integer.valueOf(s1.getAge()).compareTo(Integer.valueOf(s2.getAge())));
 	}
 
 }
