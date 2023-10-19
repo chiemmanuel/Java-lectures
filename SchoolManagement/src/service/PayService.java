@@ -1,92 +1,59 @@
-/*package service;
-
-import java.io.*;
-
-public class PayService{
-	public void read() {
-		
-		try {
-			FileReader fread = new FileReader(\"C:\\Users\\emmaj\\OneDrive\\Bureau\\Java sem1 year 2\\SchoolMaagement\\students.csv\");
-			BufferedReader br = new BufferedReader(fread);
-			Student student = new Student();
-			String line = null;
-			String spitBy = ",";
-			List<Students> students = new ArrayList<>();
-			int count = 0;
-			if (count != 0) {
-				while((line = br.readLine()) != null) {
-					if(count != 0) {
-						String[] studentList = line.split(spitBy);
-						student.setStudId(studentList[0].trim());
-						student.setName(studentList[1].trim());
-						student.setDepartmennt(studentList[2].trim());
-						int age = "";
-						age = ((studetList[4].trim()!=null && Integer.valueOf(stuudentList[4].trim())) >= 19) ? 
-								Integer.valueOf(studentList[3].trim()): 0;
-						String CSV = studentList[3].trim();
-						String[] values = csv.split(";");
-						
-					}
-				}
-				br.close();
-				fread.close();
-			} catch (IOException ex) {
-				
-			}
-				
-	}
-
-	}*/
 package service;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+
 import datamodel.Students;
 
 public class PayService {
-    public List<Students> read() {
-        List<Students> students = new ArrayList<>();
-        String csvFilePath = "C:\\Users\\emmaj\\OneDrive\\Bureau\\Java sem1 year 2\\SchoolManagement\\students.csv";
 
-        try {
-            FileReader fileReader = new FileReader(csvFilePath);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            String line;
-            String splitBy = ",";
-            int count = 0;
+	public List<Students> read() throws IOException {
+		
+		FileReader fread = new FileReader(
+				"C:\\Users\\tbert\\OneDrive\\Documents\\Travis_Classwork\\Java Applications\\students.csv");
+		BufferedReader br = new BufferedReader(fread);
+		String line = null;
+		String splitBy = ",";
+		List<Students> students = new ArrayList<Students>();
+		int count = 0;
+		while ((line = br.readLine()) != null) {
+			if (count != 0) {
+				Students student = new Students();
+				String[] studentList = line.split(splitBy);
+				student.setStudId(studentList[0].trim());
+				student.setName(studentList[1].trim());
+				student.setDepartment(studentList[2].trim());
+				String age = studentList[4].trim();
+				age = (((!age.isEmpty()) && (Integer.valueOf(studentList[4].trim())) >= 19) ? studentList[4].trim()
+						: "0");
+				student.setAge(age);
+				String CSV = studentList[3].trim();
+				String[] values = CSV.split(";");
+				student.setCourse(Arrays.asList(values));
+				student.setYear(studentList[5].trim());
+				student.setFee(Double.parseDouble(studentList[6].trim()));
+				student.setPaid(studentList[7].trim());
 
-            while ((line = bufferedReader.readLine()) != null) {
-                if (count != 0) {
-                    String[] studentList = line.split(splitBy);
-                    Students student = new Students();
-                    student.setStudId(studentList[0].trim());
-                    student.setName(studentList[1].trim());
-                    student.setDepartment(studentList[2].trim());
+				students.add(student);
+			}
+			count++;
+			System.out.println(count);
+		}
 
-                    try {
-                        int age = Integer.valueOf(studentList[3].trim());
-                        if (age >= 19) {
-                            student.setAge(String.valueOf(age));
-                        } else {
-                            student.setAge("0");
-                        }
-                    } catch (NumberFormatException e) {
-                        student.setAge("0");
-                    }
+		br.close();
+		fread.close();
+		
+		return students;
+	}
+	
+	public void sortByYear(List<Students> student_list) {
+	    Collections.sort(student_list, (s1, s2) -> Integer.valueOf(s1.getYear()).compareTo(Integer.valueOf(s2.getYear())));
+	}
 
-                    students.add(student);
-                }
-                count++;
-            }
-
-            bufferedReader.close();
-            fileReader.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
-        return students;
-    }
 }
 
