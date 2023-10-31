@@ -3,16 +3,16 @@ package launcher;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+/*import java.text.SimpleDateFormat;*/
 import java.util.List;
 
-import datamodel.Admin;
+/*import datamodel.Admin;
 import datamodel.Courses;
-import datamodel.Enrollment;
-import datamodel.Instructors;
+import datamodel.Enrollement;
+import datamodel.Instructors;*/
 import datamodel.Students;
-import datamodel.Payment;
-import datamodel.Subjects;
+/*import datamodel.Payment;
+import datamodel.Subjects;*/
 import service.PayService;
 
 public class Launcher {
@@ -36,10 +36,8 @@ public class Launcher {
 			System.out.println("\n\n After sort: \n");
 			printStudents(student_list);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
 }
-
