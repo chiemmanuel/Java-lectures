@@ -2,8 +2,9 @@ package practice;
 
 /*import java.io.FileWriter;*/
 import java.io.IOException;
-import java.util.Scanner;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 
 
 public class FileExercises {
@@ -31,14 +32,20 @@ public class FileExercises {
 	}*/
 	public static void main(String[] args) throws IOException{
         String file = "C:\\Users\\emmaj\\OneDrive\\Bureau\\Java sem1 year 2\\file exercise\\NewFile1.txt";
-        Scanner scanner = new Scanner(new File(file));
-        scanner.useDelimiter("d, ");
-
-        while(scanner.hasNext()){
-            String next = scanner.next();
-            System.out.println(next);
-        }
-        scanner.close();
+		File f = new File(file);
+		if (f.canRead()){
+			System.out.println("File can be read");
+		}
+        BufferedReader br = new BufferedReader(new FileReader(f));
+		StringBuilder result = new StringBuilder();
+		long skip = 35;
+		int value;
+		br.skip(skip);
+		while ((value = br.read()) != -1) {
+			result.append((char) value);
+		}
+		br.close();
+		System.out.println(result.toString());
     }
 
 }
